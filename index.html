@@ -1,69 +1,65 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>我们的节日--春节</title>
     <style>
         body {
-            background-image: url("BJ.jpg");
+            background-image: url('BJ.jpg');
             background-size: cover;
-            background-position: center;
             text-align: center;
         }
-        #title {
+        h1 {
+            font-size: 2em;
             font-weight: bold;
-            font-size: 40px;
-            background: linear-gradient(to right, #FFA500, #FF0000);
+            background-image: linear-gradient(to right, red, yellow);
             -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-top: 50px;
+            color: transparent;
         }
         button {
-            margin-top: 4em;
             font-size: 3em;
+            margin: 25px;
+            transition: transform 0.5s;
         }
-        #musicSwitch {
+        button:hover {
+            transform: scale(1.2);
+        }
+        #audio-switch {
             position: fixed;
-            bottom: 20px;
-            right: 20px;
+            bottom: 10px;
+            right: 10px;
+            width: 50px;
+            height: 50px;
+            background-image: url('Audio-on.jpg');
+            background-size: cover;
+            cursor: pointer;
         }
     </style>
 </head>
 <body>
-    <div id="title">我们的节日--春节</div>
-    <button id="cultureButton" onmouseover="this.style.fontSize='4em'" onmouseout="this.style.fontSize='5em'" onclick="playAudio('bt.mp3'); window.location.href='加载网址位置'">了解传统文化</button>
-    <button id="gameButton" onmouseover="this.style.fontSize='4em'" onmouseout="this.style.fontSize='5em'" onclick="playAudio('bt.mp3'); alert('很抱歉，这个功能尚未被完善')">开始闯关</button>
-    <audio id="audioPlayer" src="1.mp3" loop></audio>
-    <img id="musicSwitch" src="Audio-on.jpg" onclick="toggleMusic()">
+    <h1>我们的节日--春节</h1>
+    <button onclick="location.href='https://www.baidu.com'">了解传统文化</button>
+    <button onclick="alert('很抱歉，这个功能尚未被完善')">开始闯关</button>
+    <audio id="bg-music" loop>
+        <source src="1.mp3" type="audio/mpeg">
+        <source src="2.mp3" type="audio/mpeg">
+        <source src="3.mp3" type="audio/mpeg">
+        <source src="4.mp3" type="audio/mpeg">
+    </audio>
+    <div id="audio-switch" onclick="toggleAudio()"></div>
     <script>
-        let isMusicPlaying = true;
-        let audioPlayer = document.getElementById('audioPlayer');
-        let audioList = ['1.mp3', '2.mp3', '3.mp3', '4.mp3'];
-        let audioIndex = 0;
-
-        function playAudio(audioSrc) {
-            let audio = new Audio(audioSrc);
-            audio.play();
-        }
-
-        function toggleMusic() {
-            if (isMusicPlaying) {
-                audioPlayer.pause();
-                isMusicPlaying = false;
-                document.getElementById('music').src = "Audio-off.jpg";
+        function toggleAudio() {
+            var audioSwitch = document.getElementById('audio-switch');
+            var bgMusic = document.getElementById('bg-music');
+            if (audioSwitch.style.backgroundImage === 'url("Audio-on.jpg")') {
+                audioSwitch.style.backgroundImage = 'url("Audio-off.jpg")';
+                bgMusic.pause();
             } else {
-                audioPlayer.play();
-                isMusicPlaying = true;
-                document.getElementById('music').src = " Audio-on.jpg";
+                audioSwitch.style.backgroundImage = 'url("Audio-on.jpg")';
+                bgMusic.play();
             }
         }
-
-        audioPlayer.addEventListener('overed', function() {
-            audioIndex = (audioIndex + 1) % audioList.length;
-            audioPlayer.src = audioList[audioIndex];
-            audioPlayer.play();
-        });
     </script>
 </body>
 </html>
