@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我们的节日--春节</title>
+    <style>
+        body {
+            background-image: url("BJ.jpg");
+            background-size: cover;
+            background-position: center;
+            text-align: center;
+        }
+        #title {
+            font-weight: bold;
+            font-size: 40px;
+            background: linear-gradient(to right, #FFA500, #FF0000);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-top: 50px;
+        }
+        button {
+            margin-top: 4em;
+            font-size: 3em;
+        }
+        #musicSwitch {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div id="title">我们的节日--春节</div>
+    <button id="cultureButton" onmouseover="this.style.fontSize='25px'" onmouseout="this.style.fontSize='20px'" onclick="playAudio('bt.mp3'); window.location.href='加载网址位置'">了解传统文化</button>
+    <button id="gameButton" onmouseover="this.style.fontSize='25px'" onmouseout="this.style.fontSize='20px'" onclick="playAudio('bt.mp3'); alert('很抱歉，这个功能尚未被完善')">开始闯关</button>
+    <audio id="audioPlayer" src="1.mp3" loop></audio>
+    <img id="musicSwitch" src="Audio-on.jpg" onclick="toggleMusic()">
+    <script>
+        let isMusicPlaying = true;
+        let audioPlayer = document.getElementById('audioPlayer');
+        let audioList = ['1.mp3', '2.mp3', '3.mp3', '4.mp3'];
+        let audioIndex = 0;
+
+        function playAudio(audioSrc) {
+            let audio = new Audio(audioSrc);
+            audio.play();
+        }
+
+        function toggleMusic() {
+            if (isMusicPlaying) {
+                audioPlayer.pause();
+                isMusicPlaying = false;
+                document.getElementById('music').src = "Audio-off.jpg";
+            } else {
+                audioPlayer.play();
+                isMusicPlaying = true;
+                document.getElementById('music').src = " Audio-on.jpg";
+            }
+        }
+
+        audioPlayer.addEventListener('overed', function() {
+            audioIndex = (audioIndex + 1) % audioList.length;
+            audioPlayer.src = audioList[audioIndex];
+            audioPlayer.play();
+        });
+    </script>
+</body>
+</html>
